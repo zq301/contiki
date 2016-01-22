@@ -134,7 +134,9 @@ adv_packet_received(struct broadcast_conn *ibc, const linkaddr_t *from)
   ptr = packetbuf_dataptr();
 
   /* Copy number of announcements */
+  if(strlen(ptr)>=sizeof(announcement_msg)){
   memcpy(&adata, ptr, sizeof(struct announcement_msg));
+  }
   PRINTF("%d.%d: adv_packet_received from %d.%d with %d announcements\n",
 	 linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1],
 	 from->u8[0], from->u8[1], adata.num);
